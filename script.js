@@ -1,10 +1,5 @@
-/* ============================================
-   ENCANTO ESTÉTICA — Landing Page Scripts
-   ============================================ */
+﻿document.addEventListener('DOMContentLoaded', () => {
 
-document.addEventListener('DOMContentLoaded', () => {
-
-    // ── Navbar scroll effect ──
     const navbar = document.getElementById('navbar');
     const backToTop = document.getElementById('backToTop');
     const aboutSection = document.getElementById('about');
@@ -12,7 +7,6 @@ document.addEventListener('DOMContentLoaded', () => {
     function handleScroll() {
         const scrollY = window.scrollY;
         
-        // Mostrar navbar solo cuando se llega a la sección about
         if (aboutSection) {
             const aboutTop = aboutSection.offsetTop;
             navbar.classList.toggle('visible', scrollY > 0);
@@ -24,7 +18,6 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
 
-    // ── Mobile menu toggle ──
     const navToggle = document.getElementById('navToggle');
     const navMenu = document.getElementById('navMenu');
 
@@ -34,7 +27,6 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.style.overflow = navMenu.classList.contains('open') ? 'hidden' : '';
     });
 
-    // Close menu on link click
     document.querySelectorAll('.nav-link').forEach(link => {
         link.addEventListener('click', () => {
             navToggle.classList.remove('active');
@@ -43,12 +35,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // ── Back to top ──
     backToTop.addEventListener('click', () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
-    // ── Smooth scroll for anchor links ──
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', (e) => {
             const target = document.querySelector(anchor.getAttribute('href'));
@@ -59,7 +49,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // ── Intersection Observer (AOS-like animations) ──
     const observerOptions = {
         threshold: 0.12,
         rootMargin: '0px 0px -40px 0px'
@@ -79,7 +68,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.querySelectorAll('[data-aos]').forEach(el => observer.observe(el));
 
-    // ── Counter animation ──
     const counterObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -101,7 +89,6 @@ document.addEventListener('DOMContentLoaded', () => {
         function update(now) {
             const elapsed = now - start;
             const progress = Math.min(elapsed / duration, 1);
-            // Ease-out cubic
             const eased = 1 - Math.pow(1 - progress, 3);
             el.textContent = Math.round(target * eased);
             if (progress < 1) requestAnimationFrame(update);
@@ -109,7 +96,6 @@ document.addEventListener('DOMContentLoaded', () => {
         requestAnimationFrame(update);
     }
 
-    // ── Countdown timer ──
     const courseDate = new Date('2026-03-05T09:00:00-03:00');
 
     function updateCountdown() {
@@ -138,7 +124,6 @@ document.addEventListener('DOMContentLoaded', () => {
     updateCountdown();
     setInterval(updateCountdown, 1000);
 
-    // ── Hero floating particles ──
     const particlesContainer = document.getElementById('heroParticles');
     if (particlesContainer) {
         for (let i = 0; i < 30; i++) {
@@ -158,7 +143,6 @@ document.addEventListener('DOMContentLoaded', () => {
             particlesContainer.appendChild(particle);
         }
 
-        // Add keyframe animation
         const style = document.createElement('style');
         style.textContent = `
             @keyframes float-particle {
@@ -183,7 +167,6 @@ document.addEventListener('DOMContentLoaded', () => {
         document.head.appendChild(style);
     }
 
-    // ── Active nav link on scroll ──
     const sections = document.querySelectorAll('section[id]');
 
     function highlightNavLink() {
@@ -205,7 +188,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.addEventListener('scroll', highlightNavLink, { passive: true });
 
-    // ── Parallax effect on hero (subtle) ──
     window.addEventListener('scroll', () => {
         const hero = document.querySelector('.hero');
         const heroContent = document.querySelector('.hero-content');
@@ -217,15 +199,12 @@ document.addEventListener('DOMContentLoaded', () => {
             const heroHeight = hero.offsetHeight;
             
             if (scrolled < heroHeight) {
-                // Efecto parallax en el fondo (la imagen baja más rápido)
                 hero.style.backgroundPositionY = `${scrolled * 0.65}px`;
                 
-                // Mover el contenido hacia abajo (parallax más lento)
                 const moveDown = scrolled * 1;
                 
-                // Calcular opacidad basado en el scroll
-                const fadeStart = heroHeight * 0.3; // Empieza a desaparecer al 30% del scroll
-                const fadeEnd = heroHeight * 0.8;   // Desaparece completamente al 80%
+                const fadeStart = heroHeight * 0.3;
+                const fadeEnd = heroHeight * 0.8;
                 let opacity = 1;
                 
                 if (scrolled > fadeStart) {
@@ -233,19 +212,16 @@ document.addEventListener('DOMContentLoaded', () => {
                     opacity = Math.max(0, Math.min(1, opacity));
                 }
                 
-                // Aplicar transformación y opacidad
                 heroContent.style.transform = `translateY(${moveDown}px)`;
                 heroContent.style.opacity = opacity;
                 
-                // También aplicar al indicador de scroll
                 if (heroScrollIndicator) {
                     heroScrollIndicator.style.transform = `translateX(-50%) translateY(${moveDown}px)`;
                     heroScrollIndicator.style.opacity = opacity;
                 }
                 
-                // Aplicar opacidad a las partículas
                 if (heroParticles) {
-                    heroParticles.style.opacity = opacity * 0.8; // Un poco menos opaco
+                    heroParticles.style.opacity = opacity * 0.8;
                 }
             }
         }
