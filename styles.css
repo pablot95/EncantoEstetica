@@ -163,8 +163,8 @@ ul { list-style: none; }
     padding: 18px 0;
     transition: var(--transition);
     opacity: 1;
-    pointer-events: none;
-    transform: translateY(-10px);
+    pointer-events: all;
+    transform: translateY(0);
 }
 .navbar.visible {
     opacity: 1;
@@ -1170,6 +1170,64 @@ ul { list-style: none; }
     transform: scale(1.15);
 }
 
+/* === LIGHTBOX === */
+.lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    background: rgba(0, 0, 0, .85);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .3s ease, visibility .3s ease;
+    cursor: zoom-out;
+}
+.lightbox.active {
+    opacity: 1;
+    visibility: visible;
+}
+.lightbox-img {
+    max-width: 90vw;
+    max-height: 85vh;
+    object-fit: contain;
+    border-radius: var(--radius);
+    box-shadow: 0 20px 60px rgba(0,0,0,.5);
+    transform: scale(.9);
+    transition: transform .35s cubic-bezier(.4,0,.2,1);
+}
+.lightbox.active .lightbox-img {
+    transform: scale(1);
+}
+.lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 24px;
+    width: 44px;
+    height: 44px;
+    background: rgba(255,255,255,.12);
+    border: none;
+    border-radius: 50%;
+    color: var(--white);
+    font-size: 1.3rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+    z-index: 2001;
+}
+.lightbox-close:hover {
+    background: rgba(255,255,255,.25);
+    transform: rotate(90deg);
+}
+
+.producto-img {
+    cursor: zoom-in;
+}
+
 [data-aos] {
     opacity: 0;
     transform: translateY(30px);
@@ -1441,5 +1499,11 @@ ul { list-style: none; }
 
     .hero-cta-group .btn {
         width: 100%;
+    }
+    .btn-producto{ 
+        justify-content: center;
+        padding: 5px 12px;
+        font-size: .8rem;
+        width: 60%;
     }
 }
