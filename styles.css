@@ -830,7 +830,8 @@ ul { list-style: none; }
 .contacto-item {
     display: flex;
     gap: 18px;
-    align-items: flex-start;
+    align-items: center;
+    transform: translateY(50px);
 }
 .contacto-icon {
     width: 54px;
@@ -854,6 +855,22 @@ ul { list-style: none; }
 .contacto-item p {
     font-size: .9rem;
     color: var(--text-light);
+}
+
+a.contacto-item-link {
+    border-radius: var(--radius);
+    padding: 14px;
+    margin: -14px;
+    transition: var(--transition);
+}
+a.contacto-item-link:hover {
+    background: rgba(198,167,94,.08);
+}
+a.contacto-item-link:hover .contacto-icon {
+    border-color: var(--gold);
+}
+a.contacto-item-link:hover h4 {
+    color: var(--gold);
 }
 
 .contacto-cta-card {
@@ -1302,15 +1319,15 @@ ul { list-style: none; }
     }
     .nav-menu {
         position: fixed;
-        top: 0; right: -100%;
+        top: 80px; right: -100%;
         width: 80%;
         max-width: 320px;
-        height: 100vh;
+        height: 60vh;
         background: var(--white);
         flex-direction: column;
         align-items: flex-start;
-        padding: 100px 36px 40px;
-        gap: 4px;
+        padding: 50px 36px 40px;
+        gap: 12px;
         transition: var(--transition);
         box-shadow: -10px 0 40px rgba(0,0,0,.1);
     }
@@ -1505,5 +1522,8 @@ ul { list-style: none; }
         padding: 5px 12px;
         font-size: .8rem;
         width: 60%;
+    }
+    .contacto-item{
+        transform: translateY(0px);
     }
 }
